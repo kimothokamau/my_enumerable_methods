@@ -49,7 +49,24 @@ module Enumerable
   def my_count
     counter = 0
     my_each do |item|
+      counter += 1 if yield(item)
+    end
+    counter
+  end
 
+  def my_map
+    arr = []
+    counter = 0
+    until counter == length
+      arr.push(yield(self[counter]))
+      counter += 1
+    end
+    arr
+  end
+
+  def my_inject
+    
+  end
 
 end
 
@@ -64,4 +81,8 @@ array = [1, 2, 3, 4, 5]
 
 # p(array.my_any? { |num| num > 5 })
 
-p(array.my_none { |num| num > 7 })
+#p(array.my_none { |num| num > 7 })
+
+#p(array.my_count { |num| num > 1 })
+
+p(array.my_map { |n| n * 4 })
