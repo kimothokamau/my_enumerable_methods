@@ -39,6 +39,18 @@ module Enumerable
     false
   end
 
+  def my_none
+    my_each do |item|
+      return false if yield(item)
+    end
+    true
+  end
+
+  def my_count
+    counter = 0
+    my_each do |item|
+
+
 end
 
 array = [1, 2, 3, 4, 5]
@@ -46,8 +58,10 @@ array = [1, 2, 3, 4, 5]
 
 # array1 = %w[kevin sylvia lucy grace]
 # array1.my_each_with_index { |child, index| puts "#{child} the #{index + 1} born" }
-p(array.my_select { | num | num.even? })
+# p(array.my_select { | num | num.even? })
 
-p(array.my_all? { |num| num > 0 })
+# p(array.my_all? { |num| num > 0 })
 
-p(array.my_any? { |num| num > 5 })
+# p(array.my_any? { |num| num > 5 })
+
+p(array.my_none { |num| num > 7 })
