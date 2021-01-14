@@ -1,6 +1,7 @@
 # Enumerable Methods
 This is the second project of the Ruby module in Microverse software development technical curriculum. This project aims to test students knowledge of creating custom methods in pure ruby. Other used concepts include arrays, iterators, yield, and blocks.
 
+![screenshot](./code_screenshot.png)
 ## GETTING STARTED
 To have a local version of this code running do the following:
 - Clone the repository `git clone https://github.com/kimothokamau/my_enumerable_methods.git`
@@ -16,7 +17,7 @@ To have a local version of this code running do the following:
 
 [Live Demo Link](https://repl.it/@kkamau/FarawayTemptingPlots#main.rb)
 
-## Author
+## Authors
 
 Kimotho Kamau
 

@@ -80,11 +80,12 @@ module Enumerable
 
   def my_map(my_proc = nil)
     return to_enum(:my_each) unless block_given? || my_proc
+
     arr = []
     if block_given?
       to_a.my_each { |val| arr.push(yield(val)) }
     else
-      to_a.my_each { |val| arr.push(my_proc(val))}
+      to_a.my_each { |val| arr.push(my_proc(val)) }
     end
     arr
   end
@@ -92,13 +93,13 @@ module Enumerable
   def my_inject(*arg)
     raise LocalJumpError unless block_given? || !arg.empty?
 
-    arg_1 = arg.pop unless block_given?
+    arg = arg.pop unless block_given?
     my_array = arg + to_a
     memo = my_array.shift
     if block_given?
       my_array.my_each { |item| memo = yield(memo, item) }
     else
-      my_array.my_each { |item| memo = memo.send(arg_1, item) }
+      my_array.my_each { |item| memo = memo.send(arg, item) }
     end
     memo
   end
