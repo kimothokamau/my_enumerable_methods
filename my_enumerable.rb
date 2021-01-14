@@ -1,4 +1,6 @@
 module Enumerable
+  # rubocop:disable Metrics/CyclomaticComplexity
+
   def my_each
     return to_enum(:my_each) unless block_given?
 
@@ -37,7 +39,7 @@ module Enumerable
     end
   end
 
-  def my_all?(arg)
+  def my_all?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return false unless val }
     elsif arg.is_a?(Regexp)
@@ -47,7 +49,7 @@ module Enumerable
     true
   end
 
-  def my_any?(arg)
+  def my_any?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return true if val }
     elsif arg.is_a?(Regexp)
@@ -57,7 +59,7 @@ module Enumerable
     false
   end
 
-  def my_none?(arg)
+  def my_none?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return false if val }
     elsif arg.is_a?(Regexp)
@@ -66,6 +68,8 @@ module Enumerable
     end
     true
   end
+  # rubocop:enable Metrics/CyclomaticComplexity
+
 
   def my_count(para = nil)
     counter = 0
