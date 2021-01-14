@@ -19,15 +19,15 @@ To have a local version of this code running do the following:
 
 ## Authors
 
-Kimotho Kamau
+👤 **Kimotho Kamau**
 
---GitHub: [@kimothokamau](https://github.com/kimothokamau)
---LinkedIn: [LinkedIn] (https://www.linkedin.com/in/kimotho-kamau-6ab307185/)
+- GitHub: [@kimothokamau](https://github.com/kimothokamau)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kimotho-kamau-6ab307185/)
 
-Alexis Varela
+👤 **Alexis Varela**
 
---Github: [@alexisbec](https://github.com/alexisbec)
---LinkedIn: [LinkedIn](https://www.linkedin.com/in/alexis-varela-2584111b7/) 
+- GitHub: [@alexisbec](https://github.com/alexisbec)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/alexis-varela-2584111b7/)
 
 ##  Contributing
 
