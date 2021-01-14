@@ -44,37 +44,55 @@ module Enumerable
     end
   end
 
-  # def my_all?(arg = nil)
-  #   if !block_given? && !arg
-  #     to_a.my_each { |val| return false unless val }
-  #   elsif arg.is_a?(Class)
-  #     to_a.my_each { |val| return false unless val.is_a?(arg)}
-  #   elsif
-
-  #   my_each do |item|
-  #     return false unless yield(item)
-  #   end
-  #   true
-  # end
-
-  def my_any?
-    my_each do |item|
-      return true if yield(item)
-    end
-    false
-  end
-
-  def my_none
-    my_each do |item|
-      return false if yield(item)
+  def my_all?(arg = nil)
+    if !block_given? && !arg
+      to_a.my_each { |val| return false unless val }
+      # elsif arg.is_a?(Class)
+      # to_a.my_each { |val| return false unless val.is_a?(arg) }
+    elsif arg.is_a?(Regexp)
+      to_a.my_each { |val| return false unless arg.match(val) }
+    # elsif arg
+    #   to_a.my_each { |val| return false unless val == arg }
+    else to_a.my_each { |val| return false unless yield(val) }
     end
     true
   end
 
-  def my_count
+  def my_any?(arg = nil)
+    if !block_given? && !arg
+      to_a.my_each { |val| return true if val }
+    # elsif arg.is_a?(Class)
+    #   to_a.my_each { |val| return true if val.is_a?(arg) }
+    elsif arg.is_a?(Regexp)
+      to_a.my_each { |val| return true if arg.match(val) }
+    # elsif arg
+    #   to_a.my_each { |val| return true if val == arg }
+    else to_a.my_each { |val| return true if yield(val) }
+    end
+    false
+  end
+
+  def my_none?(arg = nil)
+    if !block_given? && !arg
+      to_a.my_each { |val| return false if val }
+    # elsif arg.is_a?(Class)
+    #   to_a.my_each { |val| return true if val.is_a?(arg) }
+    elsif arg.is_a?(Regexp)
+      to_a.my_each { |val| return false if arg.match(val) }
+    # elsif arg
+    #   to_a.my_each { |val| return true if val == arg }
+    else to_a.my_each { |val| return false if yield(val) }
+    end
+    true
+  end
+
+  def my_count(para = nil)
     counter = 0
-    my_each do |item|
-      counter += 1 if yield(item)
+    if block_given?
+      to_a.my_each { |val| counter += 1 if yield(val) }
+    elsif para
+      to_a.my_each { |val| counter += 1 if para == val }
+    else counter = to_a.length
     end
     counter
   end
@@ -92,8 +110,8 @@ end
 
 # Testing parameters
 num_arr = [1, 2, 3, 4, 5]
-# words_arr = %w[HTML CSS Ruby Rails Javascript React]
-# my_hash = { a: 1, b: 2, c: 3, d: 4 }
+words_arr = %w[ruby rails javascript react]
+my_hash = { a: 1, b: 2, c: 3, d: 4 }
 
 # puts '========Tests for my_each method========'
 
@@ -136,16 +154,76 @@ num_arr = [1, 2, 3, 4, 5]
 # puts 'Range - Return even numbers in range'
 # p((1..10).my_select { |val| val.even? })
 
-# p(num_arr.my_all? { |num| num > 2 })
+# puts '========Tests for my_all method========'
 
+# puts 'Array - Return true if block condition is true for all vals'
 # p(num_arr.my_any? { |num| num > 5 })
 
-# p(num_arr.my_none { |num| num > 7 })
+# puts 'Words-Array - Return true if block condition is true for all vals'
+# p(words_arr.my_any? { |word| word.size > 7 })
 
-# p(num_arr.my_count { |num| num > 1 })
+# puts 'Hash - Return true if block condition is true for all vals'
+# p(my_hash.my_all? { |_key, value| value > 2 })
+
+# puts 'Range - Return true if block condition is true for all vals'
+# p((1..10).my_all? { |val| val > 4 })
+
+# puts 'REGEX - Return true if block condition is true for all words'
+# p(words_arr.my_all?(/t/))
+
+# puts '========Tests for my_any method========'
+
+# puts 'Array - Return true if block condition is true for any val'
+# p(num_arr.my_any? { |num| num > 2 })
+
+# puts 'Words-Array - Return true if block condition is true for any val'
+# p(words_arr.my_any? { |word| word.size > 5 })
+
+# puts 'Hash - Return true if block condition is true for any val'
+# p(my_hash.my_any? { |_key, value| value > 6 })
+
+# puts 'Range - Return true if block condition is true for any val'
+# p((1..10).my_any? { |val| val > 4 })
+
+# puts 'REGEX - Return true if block condition is true for any word'
+# p(words_arr.my_any?(/z/))
+
+# puts '========Tests for my_none? method========'
+
+# puts 'Array - Return true if block condition is not true for any val'
+# p(num_arr.my_none? { |num| num > 2 })
+
+# puts 'Words-Array - Return true if block condition is not true for any val'
+# p(words_arr.my_none? { |word| word.size > 50 })
+
+# puts 'Hash - Return true if block condition is not true for any val'
+# p(my_hash.my_none? { |_key, value| value > 6 })
+
+# puts 'Range - Return true if block condition is not true for any val'
+# p((1..10).my_none? { |val| val > 4 })
+
+# puts 'REGEX - Return true if block condition is not true for any word'
+# p(words_arr.my_none?(/z/))
+
+puts '========Tests for my_count method========'
+
+puts 'Array - count the number of digits that satisfy condition'
+p(num_arr.my_count { |num| num > 1 })
+
+puts 'Array - count the number of digits that satisfy argument'
+p(num_arr.my_count(2))
+
+puts 'Array - count the number of digits in an array'
+p(num_arr.my_count)
+
+puts 'Range - count the number of even digits in a range'
+p((1..10).my_count { |val| val.even? })
+
+puts 'Hash - count the number of values in a hash'
+p(my_hash.my_count)
 
 # p(num_arr.my_map { |n| n * 4 })
 
 # puts '========Tests for my_inject method========'
 
-p(num_arr.my_inject(0) { |y, item| y + item })
+# p(num_arr.my_inject(0) { |y, item| y + item })
