@@ -78,16 +78,16 @@ module Enumerable
     end
     counter
   end
-end
 
-def my_map
-  arr = []
-  counter = 0
-  until counter == length
-    arr.push(yield(self[counter]))
-    counter += 1
+  def my_map
+    arr = []
+    counter = 0
+    until counter == length
+      arr.push(yield(self[counter]))
+      counter += 1
+    end
+    arr
   end
-  arr
 end
 
 # Testing parameters
