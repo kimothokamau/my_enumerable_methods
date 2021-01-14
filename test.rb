@@ -1,5 +1,6 @@
-Testing parameters
+require_relative 'enumerable'
 
+# TESTING PARAMETERS
 num_arr = [1, 2, 3, 2, 5]
 words_arr = %w[ruby rails javascript react]
 my_hash = { a: 1, b: 2, c: 3, d: 4 }

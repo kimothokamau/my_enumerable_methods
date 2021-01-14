@@ -1,4 +1,3 @@
-# rubocop:disable Metrics/CyclomaticComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -109,4 +108,3 @@ end
 def multiply_els(arr)
   arr.my_inject { |num, elem| num * elem }
 end
-# rubocop:enable Metrics/CyclomaticComplexity
