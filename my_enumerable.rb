@@ -10,13 +10,6 @@ module Enumerable
     self
   end
 
-  def my_inject(result)
-    my_each do |item|
-      result = yield(result, item)
-    end
-    result
-  end
-
   def my_each_with_index
     return to_enum(:my_each) unless block_given?
 
@@ -85,14 +78,22 @@ module Enumerable
     counter
   end
 
-  def my_map
+  def my_map(my_proc = nil)
+    return to_enum(:my_each) unless block_given? || my_proc
     arr = []
-    counter = 0
-    until counter == length
-      arr.push(yield(self[counter]))
-      counter += 1
+    if block_given?
+      to_a.my_each { |val| arr.push(yield(val)) }
+    else
+      to_a.my_each { |val| arr.push(my_proc(val))}
     end
     arr
+  end
+
+  def my_inject(result)
+    my_each do |item|
+      result = yield(result, item)
+    end
+    result
   end
 end
 
@@ -212,8 +213,18 @@ my_hash = { a: 1, b: 2, c: 3, d: 4 }
 
 # puts '========Tests for my_map method========'
 
-p(num_arr.my_map { |n| n * 4 })
+# puts 'Numerical array'
+# p(num_arr.my_map { |n| n * 4 })
+
+# puts 'Word array'
+# p(words_arr.my_map { |word| word.upcase})
+
+# puts 'Range'
+# p((1..10).my_map { |num| num + 1 })
+
+# puts 'Hash'
+# p(my_hash.my_map { |_key, val| val + 1 })
 
 # puts '========Tests for my_inject method========'
 
-# p(num_arr.my_inject(0) { |y, item| y + item })
+p(num_arr.my_inject(0) { |y, item| y + item })
