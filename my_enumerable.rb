@@ -37,7 +37,7 @@ module Enumerable
     end
   end
 
-  def my_all?(arg = nil)
+  def my_all?(arg)
     if !block_given? && !arg
       to_a.my_each { |val| return false unless val }
     elsif arg.is_a?(Regexp)
@@ -47,7 +47,7 @@ module Enumerable
     true
   end
 
-  def my_any?(arg = nil)
+  def my_any?(arg)
     if !block_given? && !arg
       to_a.my_each { |val| return true if val }
     elsif arg.is_a?(Regexp)
@@ -57,7 +57,7 @@ module Enumerable
     false
   end
 
-  def my_none?(arg = nil)
+  def my_none?(arg)
     if !block_given? && !arg
       to_a.my_each { |val| return false if val }
     elsif arg.is_a?(Regexp)
