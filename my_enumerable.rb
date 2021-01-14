@@ -47,12 +47,8 @@ module Enumerable
   def my_all?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return false unless val }
-      # elsif arg.is_a?(Class)
-      # to_a.my_each { |val| return false unless val.is_a?(arg) }
     elsif arg.is_a?(Regexp)
       to_a.my_each { |val| return false unless arg.match(val) }
-    # elsif arg
-    #   to_a.my_each { |val| return false unless val == arg }
     else to_a.my_each { |val| return false unless yield(val) }
     end
     true
@@ -61,12 +57,8 @@ module Enumerable
   def my_any?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return true if val }
-    # elsif arg.is_a?(Class)
-    #   to_a.my_each { |val| return true if val.is_a?(arg) }
     elsif arg.is_a?(Regexp)
       to_a.my_each { |val| return true if arg.match(val) }
-    # elsif arg
-    #   to_a.my_each { |val| return true if val == arg }
     else to_a.my_each { |val| return true if yield(val) }
     end
     false
@@ -75,12 +67,8 @@ module Enumerable
   def my_none?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return false if val }
-    # elsif arg.is_a?(Class)
-    #   to_a.my_each { |val| return true if val.is_a?(arg) }
     elsif arg.is_a?(Regexp)
       to_a.my_each { |val| return false if arg.match(val) }
-    # elsif arg
-    #   to_a.my_each { |val| return true if val == arg }
     else to_a.my_each { |val| return false if yield(val) }
     end
     true
@@ -109,7 +97,7 @@ module Enumerable
 end
 
 # Testing parameters
-num_arr = [1, 2, 3, 4, 5]
+num_arr = [1, 2, 3, 2, 5]
 words_arr = %w[ruby rails javascript react]
 my_hash = { a: 1, b: 2, c: 3, d: 4 }
 
@@ -157,19 +145,19 @@ my_hash = { a: 1, b: 2, c: 3, d: 4 }
 # puts '========Tests for my_all method========'
 
 # puts 'Array - Return true if block condition is true for all vals'
-# p(num_arr.my_any? { |num| num > 5 })
+# p(num_arr.my_all? { |num| num > 0 })
 
 # puts 'Words-Array - Return true if block condition is true for all vals'
-# p(words_arr.my_any? { |word| word.size > 7 })
+# p(words_arr.my_all? { |word| word.size > 3 })
 
 # puts 'Hash - Return true if block condition is true for all vals'
-# p(my_hash.my_all? { |_key, value| value > 2 })
+# p(my_hash.my_all? { |_key, value| value > 0 })
 
 # puts 'Range - Return true if block condition is true for all vals'
-# p((1..10).my_all? { |val| val > 4 })
+# p((1..10).my_all? { |val| val > 0 })
 
 # puts 'REGEX - Return true if block condition is true for all words'
-# p(words_arr.my_all?(/t/))
+# p(words_arr.my_all?(/r/))
 
 # puts '========Tests for my_any method========'
 
@@ -186,7 +174,7 @@ my_hash = { a: 1, b: 2, c: 3, d: 4 }
 # p((1..10).my_any? { |val| val > 4 })
 
 # puts 'REGEX - Return true if block condition is true for any word'
-# p(words_arr.my_any?(/z/))
+# p(words_arr.my_any?(/t/))
 
 # puts '========Tests for my_none? method========'
 
@@ -205,24 +193,26 @@ my_hash = { a: 1, b: 2, c: 3, d: 4 }
 # puts 'REGEX - Return true if block condition is not true for any word'
 # p(words_arr.my_none?(/z/))
 
-puts '========Tests for my_count method========'
+# puts '========Tests for my_count method========'
 
-puts 'Array - count the number of digits that satisfy condition'
-p(num_arr.my_count { |num| num > 1 })
+# puts 'Array - count the number of digits that satisfy condition'
+# p(num_arr.my_count { |num| num > 1 })
 
-puts 'Array - count the number of digits that satisfy argument'
-p(num_arr.my_count(2))
+# puts 'Array - count the number of digits that satisfy argument'
+# p(num_arr.my_count(2))
 
-puts 'Array - count the number of digits in an array'
-p(num_arr.my_count)
+# puts 'Array - count the number of digits in an array'
+# p(num_arr.my_count)
 
-puts 'Range - count the number of even digits in a range'
-p((1..10).my_count { |val| val.even? })
+# puts 'Range - count the number of even digits in a range'
+# p((1..10).my_count { |val| val.even? })
 
-puts 'Hash - count the number of values in a hash'
-p(my_hash.my_count)
+# puts 'Hash - count the number of values in a hash'
+# p(my_hash.my_count)
 
-# p(num_arr.my_map { |n| n * 4 })
+# puts '========Tests for my_map method========'
+
+p(num_arr.my_map { |n| n * 4 })
 
 # puts '========Tests for my_inject method========'
 
