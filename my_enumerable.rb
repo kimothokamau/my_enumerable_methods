@@ -128,7 +128,7 @@ module Enumerable
     memo
   end
 end
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity/Metrics/ModuleLength
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity,Metrics/ModuleLength
 
 def multiply_els(arr)
   arr.my_inject { |num, elem| num * elem }
