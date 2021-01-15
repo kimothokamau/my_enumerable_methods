@@ -1,4 +1,4 @@
-require_relative 'enumerable'
+require_relative 'my_enumerable'
 
 # TESTING PARAMETERS
 num_arr = [1, 2, 3, 2, 5]
