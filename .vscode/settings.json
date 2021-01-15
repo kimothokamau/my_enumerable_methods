@@ -1,0 +1,7 @@
+{
+  "extensions.ignoreRecommendations": true,
+  "ruby.lint": {
+  
+  },
+  "ruby.rubocop.suppressRubocopWarnings": true
+}
