@@ -1,4 +1,4 @@
-# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/ModuleLength
 
 module Enumerable
   def my_each
@@ -128,7 +128,7 @@ module Enumerable
     memo
   end
 end
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity/Metrics/ModuleLength
 
 def multiply_els(arr)
   arr.my_inject { |num, elem| num * elem }
