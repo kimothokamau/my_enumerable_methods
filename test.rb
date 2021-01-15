@@ -156,9 +156,6 @@ p(num_arr.my_map { |n| n * 4 })
 puts 'Proc- Word array'
 p(words_arr.my_map(&:upcase))
 
-puts 'Block- Word array'
-p(words_arr.my_map { |word| word.upcase })
-
 puts 'Range'
 p((1..10).my_map { |num| num + 1 })
 
