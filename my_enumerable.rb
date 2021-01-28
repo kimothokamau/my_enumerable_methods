@@ -1,4 +1,4 @@
-# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity, Metrics/ModuleLength
 
 module Enumerable
   def my_each
@@ -24,6 +24,8 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_each) unless block_given?
+
     new_arr = []
     new_hash = {}
     if is_a?(Hash)
@@ -42,8 +44,12 @@ module Enumerable
   def my_all?(arg = nil)
     if !block_given? && !arg
       to_a.my_each { |val| return false unless val }
+    elsif arg.is_a?(Class)
+      to_a.my_each { |val| return false unless val.is_a?(arg) }
     elsif arg.is_a?(Regexp)
       to_a.my_each { |val| return false unless arg.match(val) }
+    elsif arg
+      to_a.my_each { |val| return false unless val == arg }
     else to_a.my_each { |val| return false unless yield(val) }
     end
     true
@@ -54,6 +60,10 @@ module Enumerable
       to_a.my_each { |val| return true if val }
     elsif arg.is_a?(Regexp)
       to_a.my_each { |val| return true if arg.match(val) }
+    elsif arg.is_a?(Class)
+      to_a.my_each { |val| return true if val.is_a?(arg) }
+    elsif arg
+      to_a.my_each { |val| return true if val == arg }
     else to_a.my_each { |val| return true if yield(val) }
     end
     false
@@ -64,6 +74,10 @@ module Enumerable
       to_a.my_each { |val| return false if val }
     elsif arg.is_a?(Regexp)
       to_a.my_each { |val| return false if arg.match(val) }
+    elsif arg.is_a?(Class)
+      to_a.my_each { |val| return false if val.is_a?(arg) }
+    elsif arg
+      to_a.my_each { |val| return false if val == arg }
     else to_a.my_each { |val| return false if yield(val) }
     end
     true
@@ -81,13 +95,21 @@ module Enumerable
   end
 
   def my_map(my_proc = nil)
-    return to_enum(:my_each) unless block_given? || my_proc
+    return to_enum(:my_map) unless block_given?
 
     arr = []
-    if block_given?
-      to_a.my_each { |val| arr.push(yield(val)) }
+    if block_given? && my_proc.is_a?(Proc)
+      my_each do |index|
+        arr.push(my_proc.call(index))
+      end
+    elsif !block_given? && my_proc.is_a?(Proc)
+      my_each do |index|
+        arr.push(my_proc.call(index))
+      end
     else
-      to_a.my_each { |val| arr.push(my_proc(val)) }
+      my_each do |index|
+        arr.push(yield(index))
+      end
     end
     arr
   end
@@ -106,7 +128,7 @@ module Enumerable
     memo
   end
 end
-# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity,Metrics/ModuleLength
 
 def multiply_els(arr)
   arr.my_inject { |num, elem| num * elem }
