@@ -1,3 +1,5 @@
+# rubocop: disable Layout/LineLength
+
 require_relative '../my_enumerable'
 
 describe Enumerable do
@@ -22,25 +24,15 @@ describe Enumerable do
 
   describe '#my_each_with_index' do
     it 'compares the output of my_each_with_index vs each_with_index enumerable methods on a number array with a block' do
-      expect(num_arr.my_each_with_index do |_value, index|
-               puts index.to_s
-             end).to eql(num_arr.each_with_index do |_value, index|
-                           puts index.to_s
-                         end)
+      expect(num_arr.my_each_with_index { |_value, index| puts index.to_s }).to eql(num_arr.each_with_index { |_value, index| puts index.to_s })
     end
 
     it 'compares the output of my_each_with_index vs each_with_index enumerable methods on a word array' do
-      expect(words_arr.my_each_with_index do |_value, index|
-               puts index.to_s
-             end).to eql(words_arr.each_with_index do |_value, index|
-                           puts index.to_s
-                         end)
+      expect(words_arr.my_each_with_index { |_value, index| puts index.to_s }).to eql(words_arr.each_with_index { |_value, index| puts index.to_s })
     end
 
     it 'compares the output of my_each_with_index vs each_with_index enumerable methods on a hash' do
-      expect(my_hash.my_each_with_index { |key, _value| puts key.to_s }).to eql(my_hash.each_with_index do |key, _value|
-                                                                                  puts key.to_s
-                                                                                end)
+      expect(my_hash.my_each_with_index { |key, _value| puts key.to_s }).to eql(my_hash.each_with_index { |key, _value| puts key.to_s })
     end
   end
 
@@ -174,3 +166,5 @@ describe Enumerable do
     end
   end
 end
+
+# rubocop: enable Layout/LineLength
