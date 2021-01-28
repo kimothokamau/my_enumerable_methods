@@ -19,6 +19,10 @@ To have a local version of this code running do the following:
 
 ## Authors
 
+👤 **Tasheka Hamilton**
+
+- GitHub: [@tasheka](https://github.com/tasheka)
+
 👤 **Kimotho Kamau**
 
 - GitHub: [@kimothokamau](https://github.com/kimothokamau)
