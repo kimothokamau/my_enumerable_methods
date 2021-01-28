@@ -101,35 +101,35 @@ my_hash = { a: 1, b: 2, c: 3, d: 4 }
 
 # puts '========Tests for my_none? method========'
 
-# puts 'Array - Return true if block condition is not true for any val'
-# p(num_arr.my_none? { |num| num > 2 })
+puts 'Array - Return true if block condition is not true for any val'
+p(num_arr.my_none? { |num| num > 2 })
 
-# puts 'Words-Array - Return true if block condition is not true for any val'
-# p(words_arr.my_none? { |word| word.size > 50 })
+puts 'Words-Array - Return true if block condition is not true for any val'
+p(words_arr.my_none? { |word| word.size > 50 })
 
-# puts 'Hash - Return true if block condition is not true for any val'
-# p(my_hash.my_none? { |_key, value| value > 6 })
+puts 'Hash - Return true if block condition is not true for any val'
+p(my_hash.my_none? { |_key, value| value > 6 })
 
-# puts 'Range - Return true if block condition is not true for any val'
-# p((1..10).my_none? { |val| val > 4 })
+puts 'Range - Return true if block condition is not true for any val'
+p((1..10).my_none? { |val| val > 4 })
 
-# puts 'REGEX - Return true if block condition is not true for any word'
-# p(words_arr.my_none?(/z/))
+puts 'REGEX - Return true if block condition is not true for any word'
+p(words_arr.my_none?(/z/))
 
-# puts 'Class - Return true if none of the elements belong to the class given'
-# p(words_arr.my_none?(Integer))
+puts 'Class - Return true if none of the elements belong to the class given'
+p(words_arr.my_none?(Integer))
 
-# puts 'Class - Return true if none of the elements belong to the class given'
-# p(num_arr.my_none?(String))
+puts 'Class - Return true if none of the elements belong to the class given'
+p(num_arr.my_none?(String))
 
-# puts 'Class - Return true if none of the elements belong to the class given'
-# p(words_arr.my_none?(Numeric))
+puts 'Class - Return true if none of the elements belong to the class given'
+p(words_arr.my_none?(Numeric))
 
-# puts 'Class - Return false if one of the elements belong to the class given'
-# p(words_arr.my_none?(String))
+puts 'Class - Return false if one of the elements belong to the class given'
+p(words_arr.my_none?(String))
 
-# puts 'Argument/paramaeter - Return true if none of the elements match the given argument'
-# p(words_arr.my_none?('react'))
+puts 'Argument/paramaeter - Return true if none of the elements match the given argument'
+p(words_arr.my_none?('react'))
 
 # puts '========Tests for my_count method========'
 
